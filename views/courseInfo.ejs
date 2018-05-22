@@ -1,0 +1,61 @@
+<% include partials/header %>
+<link rel="stylesheet" href="/stylesheets/courseInfo.css">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="container">
+    <% if (courseInfo["data"] == "") { %>
+        <h1> 
+            Course <%=courseSubject%> <%=courseNumber%> does not exist, Please search again 
+        </h1>
+    <% } else { %>
+        <h1><%=courseSubject%> <%=courseNumber%>: <%= courseInfo["data"][0]["title"] %> <i class="fa fa-plus" aria-hidden="true"></i></h1>
+        <ul>
+                <% courseInfo["data"].forEach(function(info){ %>
+                <div class="classInfo container">
+                <div class="basic">
+                    <div class="important">
+                        <li><h4>Section: <%= info["section"] %></h4></li>
+                        <li><i class="fa fa-smile-o" aria-hidden="true"></i> Term: <%= info["term"] %></li>
+                        <li><i class="fa fa-graduation-cap" aria-hidden="true"></i> Campus: <%= info["campus"] %></li>
+                    </div>
+                    <% info["classes"].forEach(function(classInfo){ %>
+                        <li><i class="fa fa-clock-o" aria-hidden="true"></i> Time: <%= classInfo["date"]["start_time"] %> - <%= classInfo["date"]["end_time"] %> <%= classInfo["date"]["weekdays"] %> </li>
+                        <li><i class="fa fa-building" aria-hidden="true"></i> Location: <%= classInfo["location"]["building"] %> <%= classInfo["location"]["room"] %></li>
+                        <li><i class="fa fa-user" aria-hidden="true"></i> Instructor: 
+                        <% if (classInfo["instructors"].length == 0) { %>
+                            Staff
+                        <% } else { %>
+                            <% classInfo["instructors"].forEach(function(instructor){ %>
+                                <%= instructor %>
+                            <% }); %>
+                        <% } %>
+                        </li>
+                    <% }); %>
+                    <li><i class="fa fa-plus-circle" aria-hidden="true"> More Info</i></li>
+                </div>
+                <div class="details">
+                    <li>Class Number: <%= info["class_number"] %></li>
+                    <li>Enrollment Capacity: <%= info["enrollment_capacity"] %></li>
+                    <li>Enrollment Total: <%= info["enrollment_total"] %></li>
+                    <li>Reserves:
+                        <% if (info["reserves"].length == 0) { %>
+                            N/A
+                        <% } else { %>
+                            <ul>
+                                <% info["reserves"].forEach(function(reserve){ %>
+                                <li>Reserve Group: <%= reserve["reserve_group"] %> </li>
+                                <li>Enrollment Capacity: <%= reserve["enrollment_capacity"] %> </li>
+                                <li>Enrollment Total: <%= reserve["enrollment_total"] %> </li>
+                                <% }); %>
+                            </ul>
+                        <% } %>
+                    </li>
+                </div>
+                </div>
+            <% }); %>
+        </ul>
+    <% }%>
+    
+    <a href="/courseSearch">Search Again</a>
+</div>
+<script type="text/javascript" src="/js/courseInfo.js"></script>
+<% include partials/footer %>

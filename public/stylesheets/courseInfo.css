@@ -1,0 +1,45 @@
+.container h1 {
+    background: #2980B9;
+    padding: 30px 20px;
+     text-align: center;
+     margin: 0 auto;
+     color: white;
+    border-radius: 5%;
+    border: 3px solid rgba(0, 0, 0, 0);
+}
+
+.fa-plus {
+    float: right;
+}
+
+.fa-plus-circle {
+    float: right;
+}
+
+ul {
+    list-style: none;
+}
+
+.classInfo {
+    background-color: white;
+    width: 95%;
+    padding: 10px;
+    display: none;
+}
+
+.classInfo:nth-child(2n) {
+    background-color: #F7F7F7;
+}
+
+.details{
+    margin-left: 10%;
+    display: none;
+}
+
+.important {
+    font-weight: bold;
+}
+
+.detailsDisplay{
+    display: block;
+}
